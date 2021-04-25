@@ -12,7 +12,7 @@ def call(String repoUrl) {
            }
            stage("Checkout Code") {
                steps {
-                  echo "2
+                  echo "2"
                }
            }
            stage("Cleaning workspace") {
