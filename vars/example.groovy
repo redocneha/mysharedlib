@@ -17,7 +17,7 @@ def call(String repoUrl) {
            }
            stage("Cleaning workspace") {
                steps {
-                   echo "3
+                   echo "3"
                }
            }
            stage("Running Testcase") {
