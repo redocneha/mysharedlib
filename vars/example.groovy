@@ -6,6 +6,7 @@ pipeline {
         timestamps()
     }
 
+def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
 
     stages {
        
@@ -14,7 +15,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                       echo env.GIT_BRANCH
+                       echo branchName
                     }
                 }
                  stage('Unit test') {
