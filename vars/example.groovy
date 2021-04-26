@@ -1,6 +1,6 @@
 def call(Map params){
  
-    def branch = ${GIT_BRANCH}
+   
 pipeline {
     agent any
     options{
@@ -9,11 +9,11 @@ pipeline {
     stages {
        
         stage('parallel stage'){
-            when{ anyOf{branch 'master' ; branch 'release-/*'}}
+           
               parallel{
                 stage('Build'){
                     steps{
-                        echo 'Build Stage done'
+                       echo 'Pulling...' + env.BRANCH_NAME
                     }
                 }
                  stage('Unit test') {
