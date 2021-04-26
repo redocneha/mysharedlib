@@ -6,6 +6,7 @@ pipeline {
     options{
         timestamps()
     }
+ 
     stages {
        
         stage('parallel stage'){
@@ -13,7 +14,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                       echo 'Pulling...' + env.BRANCH_NAME
+                       echo 'Pulling...' + scm.branches[0].name
                     }
                 }
                  stage('Unit test') {
