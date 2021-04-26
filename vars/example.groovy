@@ -8,6 +8,7 @@ pipeline {
     stages {
        
         stage('parallel stage'){
+            when{ anyOf{ branch 'feature-/*' ; branch 'master' ; branch 'release-/*'}}
               parallel{
                 stage('Build'){
                     steps{
@@ -22,16 +23,19 @@ pipeline {
               }
         }
         stage('Sonar') {
+            when{ anyOf{ branch 'feature-/*' ; branch 'master' ; branch 'release-/*'}}
                     steps {
                         echo 'Sonar Stage done'
                     }
          }
           stage('Docker build') {
+              when{ anyOf{ branch 'feature-/*' ; branch 'master' ; branch 'release-/*'}}
                     steps {
                         echo 'Docker build stage done'
                     }
          }
           stage('Deploy') {
+              when{ anyOf{ branch 'feature-/*' ; branch 'master' ; branch 'release-/*'}}
                     steps {
                         echo 'Deploy stage done'
                     }
