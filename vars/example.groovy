@@ -7,6 +7,7 @@ pipeline {
     }
     stages {
        
+        stage('parallel stage'){
               parallel{
                 stage('Build'){
                     steps{
@@ -18,7 +19,7 @@ pipeline {
                         echo 'Unit test done'
                     }
                 }
-              
+              }
         }
         stage('Sonar') {
                     steps {
