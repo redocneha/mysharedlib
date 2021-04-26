@@ -14,7 +14,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                       echo 'Pulling...' + ${env.BRANCH_NAME}
+                       echo ${env.JOB_NAME.replaceFirst('.+/', '')}
                     }
                 }
                  stage('Unit test') {
