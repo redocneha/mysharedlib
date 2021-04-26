@@ -1,5 +1,6 @@
 def call(Map params){
-
+ 
+    def branch = ${GIT_BRANCH}
 pipeline {
     agent any
     options{
