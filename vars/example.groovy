@@ -14,7 +14,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                       echo "${env.GIT_BRANCH}"
+                       echo env.GIT_BRANCH
                     }
                 }
                  stage('Unit test') {
