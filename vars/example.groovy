@@ -14,7 +14,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                       echo ${env.JOB_NAME}
+                       echo "${env.JOB_NAME}"
                     }
                 }
                  stage('Unit test') {
