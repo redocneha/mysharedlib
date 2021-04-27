@@ -12,7 +12,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                        echo env
+                        println env
                     }
                 }
                  stage('Unit test') {
