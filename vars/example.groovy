@@ -4,7 +4,7 @@ def call(Map params)
     agent any
 
     environment {
-        FOO = "bar"
+        FOO = GIT_BRANCH.replaceFirst(/^.*\//, '')
     }
 
     stages {
@@ -14,6 +14,7 @@ def call(Map params)
             }
 
             steps {
+                echo GIT_BRANCH
                 echo "FOO = ${env.FOO}"
                 echo "NAME = ${env.NAME}"
 
