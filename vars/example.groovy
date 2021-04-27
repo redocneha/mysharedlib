@@ -6,7 +6,7 @@ pipeline {
         timestamps()
     }
 
-def branchName = ${GIT_BRANCH}
+def branchName = env.PATH
 
     stages {
        
