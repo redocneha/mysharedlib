@@ -15,7 +15,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                       echo branch
+                        sh 'printenv'
                     }
                 }
                  stage('Unit test') {
