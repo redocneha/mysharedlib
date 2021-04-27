@@ -20,7 +20,7 @@ environment {
               parallel{
                 stage('Build'){
                     steps{
-                        println branchName
+                        echo $branchName
                     }
                 }
                  stage('Unit test') {
