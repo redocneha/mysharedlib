@@ -33,10 +33,10 @@ def call(Map params)
         }
         stage('Sonar') {
 		when { 
-                anyOf {
-                    expression { branchName ==~ 'feature-/*'}
-                    expression { branchName ==~ 'master'}
-                    expression { branchName ==~ 'release-/*'}       
+                 anyOf {
+ 			expression { branchName ==~ /feature.*/ }
+			expression { branchName ==~ 'master'}
+			expression { branchName ==~ /release.*/}       
                 }
             }
                     steps {
@@ -46,9 +46,9 @@ def call(Map params)
           stage('Docker build') {
      		when { 
                 anyOf {
-                    expression { branchName ==~ 'feature-/*'}
-                    expression { branchName ==~ 'master'}
-                    expression { branchName ==~ 'release-/*'}       
+ 			expression { branchName ==~ /feature.*/ }
+			expression { branchName ==~ 'master'}
+			expression { branchName ==~ /release.*/}       
                 }
             }
                     steps {
@@ -58,10 +58,10 @@ def call(Map params)
           stage('Deploy') {
           
             when { 
-                anyOf {
-                    expression { branchName ==~ 'feature-/*'}
-                    expression { branchName ==~ 'master'}
-                    expression { branchName ==~ 'release-/*'}       
+                 anyOf {
+ 			expression { branchName ==~ /feature.*/ }
+			expression { branchName ==~ 'master'}
+			expression { branchName ==~ /release.*/}       
                 }
             }
                     steps {
@@ -70,9 +70,9 @@ def call(Map params)
          }
          stage('BDD') {
              when { 
-                anyOf {                  
-                    expression { branchName ==~ 'master'}
-                    expression { branchName ==~ 'release-/*'}       
+                anyOf {
+			expression { branchName ==~ 'master'}
+			expression { branchName ==~ /release.*/}       
                 }
             }
                     steps {
@@ -81,9 +81,9 @@ def call(Map params)
          }
          stage('Nexus publish') {
              when { 
-                anyOf {
-                    expression { branchName ==~ 'master'}
-                    expression { branchName ==~ 'release-/*'}       
+                 anyOf {
+			expression { branchName ==~ 'master'}
+			expression { branchName ==~ /release.*/}       
                 }
             }
                     steps {
