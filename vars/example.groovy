@@ -9,7 +9,11 @@ def call(Map params)
 
     stages {
         stage("Env Variables") {
-            when { branchName 'master'}
+            when { 
+                anyOf {
+                    expression { branchName ==~ 'master'}
+                }
+            }
             environment {
                 NAME = "Alan"
             }
