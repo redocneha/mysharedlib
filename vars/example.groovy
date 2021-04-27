@@ -11,7 +11,7 @@ def call(Map params)
         stage("Env Variables") {
             when { 
                 anyOf {
-                    expression { branchName ==~ 'ma*'}
+                    expression { branchName ==~ 'main'}
                 }
             }
             environment {
