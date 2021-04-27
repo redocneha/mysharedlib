@@ -7,8 +7,8 @@ def call(Map params)
         branchName = GIT_BRANCH.replaceFirst(/^.*\//, '')
     }
      stages {
-        stage{
-	when { 
+        stage('Parallel Steps'){
+	  when { 
                 anyOf {
                     expression { branchName ==~ 'feature-/*'}
                     expression { branchName ==~ 'master'}
