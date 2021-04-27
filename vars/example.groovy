@@ -12,8 +12,8 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                        en= bat 'set' 
-                        echo en.GIT_BRANCH
+                        bat 'set.BRANCH_NAME' 
+                        
                     }
                 }
                  stage('Unit test') {
