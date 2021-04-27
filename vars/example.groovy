@@ -18,7 +18,7 @@ environment {
               parallel{
                 stage('Build'){
                     steps{
-                        echo ${branchName}
+                        echo "${branchName}"
                     }
                 }
                  stage('Unit test') {
