@@ -1,3 +1,4 @@
+def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
 
 def call(Map params){
     
@@ -17,8 +18,7 @@ environment {
               parallel{
                 stage('Build'){
                     steps{
-                         sh 'printenv'
-                        echo scm.branches[0].name
+                        echo branchName
                     }
                 }
                  stage('Unit test') {
