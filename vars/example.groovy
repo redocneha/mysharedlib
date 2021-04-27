@@ -13,9 +13,9 @@ def call(Map params)
         stage('Parallel Steps'){
 	  when { 
                 anyOf {
-                    expression { branchName =~ '/^feature-*/'}
+                    expression { branchName =~ '/^feature(.*)/'}
                     expression { branchName ==~ 'master'}
-                    expression { branchName =~ 'release-/*'}       
+                    expression { branchName =~ '/^release(.*)/*'}       
                 }
             }
              parallel{
