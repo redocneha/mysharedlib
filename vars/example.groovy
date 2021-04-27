@@ -13,8 +13,8 @@ def call(Map params)
         stage('Parallel Steps'){
 	  when { 
                 anyOf {
-			expression { branchName ==~ /^{feature}.*/}
-                    expression { branchName ==~ 'master'}
+ 			expression { BRANCH_NAME ==~ /feature.*/ }
+			expression { branchName ==~ 'master'}
 			expression { branchName ==~ /^{release}.*/}       
                 }
             }
