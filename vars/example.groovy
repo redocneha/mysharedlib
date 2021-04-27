@@ -1,8 +1,3 @@
-def getBranchName(){
-    checkout scm
-   return scm.branches[0].name
-}
-def branchName = getBranchName()
 
 def call(Map params){
     
@@ -11,11 +6,10 @@ pipeline {
     options{
         timestamps()
     }
-
-
-
-
-
+environment {
+        DISABLE_AUTH = 'true'
+        DB_ENGINE    = 'sqlite'
+    }
     stages {
        
         stage('parallel stage'){
@@ -23,7 +17,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                        echo branchName
+                         sh 'printenv'
                         echo scm.branches[0].name
                     }
                 }
@@ -35,19 +29,19 @@ pipeline {
               }
         }
         stage('Sonar') {
-           when{ anyOf{branch 'master' ; branch 'release-/*'}}
+           when{ anyOf{branch 'master' ; branch 'release-/*' ; branch 'feature-/*'}}
                     steps {
                         echo 'Sonar Stage done'
                     }
          }
           stage('Docker build') {
-              when{ anyOf{branch 'master' ; branch 'release-/*'}}
+              when{ anyOf{branch 'master' ; branch 'release-/*' ; branch 'feature-/*'}}
                     steps {
                         echo 'Docker build stage done'
                     }
          }
           stage('Deploy') {
-              when{ anyOf{branch 'master' ; branch 'release-/*'}}
+              when{ anyOf{branch 'master' ; branch 'release-/*' ; branch 'feature-/*'}}
                     steps {
                         echo 'Deploy stage done'
                     }
