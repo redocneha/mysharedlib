@@ -12,7 +12,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                        sh 'env'
+                        sh "env"
                     }
                 }
                  stage('Unit test') {
