@@ -9,13 +9,13 @@ pipeline {
         timestamps()
     }
     stages {
-       
+      
         stage('parallel stage'){
            
               parallel{
                 stage('Build'){
                     steps{
-                      sh "echo ${branchName}" 
+                      echo branchName
                         
                     }
                 }
