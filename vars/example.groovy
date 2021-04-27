@@ -1,3 +1,11 @@
+def getCurrentBranch () {
+    return sh (
+        script: 'git rev-parse --abbrev-ref HEAD',
+        returnStdout: true
+    ).trim()
+}
+def branchName = getCurrentBranch()
+
 def call(Map params){
     
 pipeline {
@@ -6,15 +14,10 @@ pipeline {
         timestamps()
     }
 
-def branchName = getCurrentBranch()
+
 echo 'My branch is' + branchName
 
-def getCurrentBranch () {
-    return sh (
-        script: 'git rev-parse --abbrev-ref HEAD',
-        returnStdout: true
-    ).trim()
-}
+
 
     stages {
        
