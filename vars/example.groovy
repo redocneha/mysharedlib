@@ -1,10 +1,13 @@
+def getBranchName(){
+	return GIT_BRANCH.replaceFirst(/^.*\//, '')
+}
 def call(Map params)
 {
     pipeline {
     agent any
 
     environment {
-        branchName = GIT_BRANCH.replaceFirst(/^.*\//, '')
+        branchName = getBranchName()
     }
      stages {
         stage('Parallel Steps'){
