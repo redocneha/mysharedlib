@@ -6,7 +6,15 @@ pipeline {
         timestamps()
     }
 
+def branchName = getCurrentBranch()
+echo 'My branch is' + branchName
 
+def getCurrentBranch () {
+    return sh (
+        script: 'git rev-parse --abbrev-ref HEAD',
+        returnStdout: true
+    ).trim()
+}
 
     stages {
        
@@ -16,7 +24,7 @@ pipeline {
                 stage('Build'){
                     steps{
                        checkout scm
-                       echo "My branch is: ${env.BRANCH_NAME}"
+                        echo "My branch is: ${branchName}"
                     }
                 }
                  stage('Unit test') {
