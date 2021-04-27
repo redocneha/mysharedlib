@@ -15,7 +15,7 @@ def call(Map params)
                 anyOf {
  			expression { branchName ==~ /feature.*/ }
 			expression { branchName ==~ 'master'}
-			expression { branchName ==~ /^{release}.*/}       
+			expression { branchName ==~ /release.*/}       
                 }
             }
              parallel{
