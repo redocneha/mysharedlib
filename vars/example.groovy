@@ -17,8 +17,8 @@ environment {
               parallel{
                 stage('Build'){
                     steps{
-                        def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-                        echo "${branchName}"
+                         branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                        echo branchName
                     }
                 }
                  stage('Unit test') {
