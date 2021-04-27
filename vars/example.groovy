@@ -6,7 +6,7 @@ pipeline {
         timestamps()
     }
 
-def branchName = env.PATH
+
 
     stages {
        
@@ -15,7 +15,7 @@ def branchName = env.PATH
               parallel{
                 stage('Build'){
                     steps{
-                       echo branchName
+                       echo env.PATH
                     }
                 }
                  stage('Unit test') {
