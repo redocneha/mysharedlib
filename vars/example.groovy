@@ -1,4 +1,5 @@
 def branchName = GIT_BRANCH.replaceFirst(/^.*\//, '')
+echo $branchName
 def call(Map params){
  
 pipeline {
