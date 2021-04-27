@@ -12,7 +12,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                       def en= bat 'set' 
+                        en= bat 'set' 
                         echo en.GIT_BRANCH
                     }
                 }
