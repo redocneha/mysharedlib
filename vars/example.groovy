@@ -15,7 +15,8 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                        sh 'printenv'
+                        echo env.BRANCH_NAME
+
                     }
                 }
                  stage('Unit test') {
