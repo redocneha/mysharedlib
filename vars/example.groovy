@@ -1,18 +1,9 @@
-def getBranch(){
-    return sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-}
 def call(Map params){
 
 pipeline {
     agent any
     options{
         timestamps()
-    }
-environment {
-        DISABLE_AUTH = 'true'
-        DB_ENGINE    = 'sqlite'
-        branchName = getBranch()
-
     }
     stages {
        
@@ -21,7 +12,7 @@ environment {
               parallel{
                 stage('Build'){
                     steps{
-                        echo $branchName
+                        echo env.BRANCH_NAME
                     }
                 }
                  stage('Unit test') {
