@@ -1,4 +1,3 @@
-def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
 
 def call(Map params){
     
@@ -18,6 +17,7 @@ environment {
               parallel{
                 stage('Build'){
                     steps{
+                        def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                         echo "${branchName}"
                     }
                 }
