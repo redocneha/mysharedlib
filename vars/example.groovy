@@ -1,9 +1,8 @@
 def getBranch(){
     return sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
 }
-def branchName = getBranch()
 def call(Map params){
-    
+
 pipeline {
     agent any
     options{
@@ -12,6 +11,8 @@ pipeline {
 environment {
         DISABLE_AUTH = 'true'
         DB_ENGINE    = 'sqlite'
+        branchName = getBranch()
+
     }
     stages {
        
