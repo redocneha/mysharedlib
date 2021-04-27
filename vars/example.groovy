@@ -9,6 +9,7 @@ def call(Map params)
 
     stages {
         stage("Env Variables") {
+            when { branchName 'master'}
             environment {
                 NAME = "Alan"
             }
