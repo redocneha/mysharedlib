@@ -83,7 +83,7 @@ def call(Map params)
              when { 
                  anyOf {
 			expression { branchName ==~ 'master'}
-			expression { branchName ==~ /release.*/}       
+			 expression { branchName ==~ /{release}.*/}       
                 }
             }
                     steps {
