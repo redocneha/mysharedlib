@@ -12,7 +12,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                        bat 'set.BRANCH_NAME' 
+                        bat 'set.GIT_BRANCH' 
                         
                     }
                 }
