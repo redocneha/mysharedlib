@@ -1,10 +1,3 @@
-def getCurrentBranch () {
-    return sh (
-        script: 'git rev-parse --abbrev-ref HEAD',
-        returnStdout: true
-    ).trim()
-}
-def branchName = getCurrentBranch()
 
 def call(Map params){
     
@@ -25,7 +18,6 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                       checkout scm
                         echo scm.branches[0].name
                     }
                 }
