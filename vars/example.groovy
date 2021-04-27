@@ -1,65 +1,30 @@
-def b = "Neha"
-def call(Map params){
- environment {
-  branchName = GIT_BRANCH.replaceFirst(/^.*\//, '')
- }
-
 pipeline {
     agent any
-    options{
-        timestamps()
+
+    environment {
+        FOO = "bar"
     }
+
     stages {
-      
-        stage('parallel stage'){
-           
-              parallel{
-                stage('Build'){
-                    steps{
-                     echo "${env.branchName}"
-                        
-                    }
+        stage("Env Variables") {
+            environment {
+                NAME = "Alan"
+            }
+
+            steps {
+                echo "FOO = ${env.FOO}"
+                echo "NAME = ${env.NAME}"
+
+                script {
+                    env.TEST_VARIABLE = "some test value"
                 }
-                 stage('Unit test') {
-                    steps {
-                        echo 'Unit test done'
-                    }
+
+                echo "TEST_VARIABLE = ${env.TEST_VARIABLE}"
+
+                withEnv(["ANOTHER_ENV_VAR=here is some value"]) {
+                    echo "ANOTHER_ENV_VAR = ${env.ANOTHER_ENV_VAR}"
                 }
-              }
+            }
         }
-        stage('Sonar') {
-           when{ anyOf{branch 'master' ; branch 'release-/*' ; branch 'feature-/*'}}
-                    steps {
-                        echo 'Sonar Stage done'
-                    }
-         }
-          stage('Docker build') {
-              when{ anyOf{branch 'master' ; branch 'release-/*' ; branch 'feature-/*'}}
-                    steps {
-                        echo 'Docker build stage done'
-                    }
-         }
-          stage('Deploy') {
-              when{ anyOf{branch 'master' ; branch 'release-/*' ; branch 'feature-/*'}}
-                    steps {
-                        echo 'Deploy stage done'
-                    }
-         }
-         stage('BDD') {
-             when{ anyOf{branch 'master' ; branch 'release-/*'}}
-                    steps {
-                        echo ' BDD stage done'
-                    }
-         }
-         stage('Nexus publish') {
-             when{ anyOf{branch 'master' ; branch 'release-/*'}}
-                    steps {
-                        echo 'Nexus publish Stage done'
-                    }
-         }
-        
     }
-}
-
-
 }
