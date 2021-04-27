@@ -1,4 +1,7 @@
-
+def getBranch(){
+    return sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+}
+def branchName = getBranch()
 def call(Map params){
     
 pipeline {
@@ -17,8 +20,7 @@ environment {
               parallel{
                 stage('Build'){
                     steps{
-                         branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-                        echo branchName
+                        println branchName
                     }
                 }
                  stage('Unit test') {
