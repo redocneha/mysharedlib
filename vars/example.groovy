@@ -9,14 +9,13 @@ def call(Map params)
 
     stages {
         stage("Env Variables") {
-            when { $env.branchName 'master'}
             environment {
                 NAME = "Alan"
             }
 
             steps {
                 echo GIT_BRANCH
-                echo "FOO = ${env.branchName}"
+                echo "FOO = ${branchName}"
                 echo "NAME = ${env.NAME}"
 
              
