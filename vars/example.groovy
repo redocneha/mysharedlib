@@ -4,18 +4,19 @@ def call(Map params)
     agent any
 
     environment {
-        FOO = GIT_BRANCH.replaceFirst(/^.*\//, '')
+        branchName = GIT_BRANCH.replaceFirst(/^.*\//, '')
     }
 
     stages {
         stage("Env Variables") {
+            when { $env.branchName 'master'}
             environment {
                 NAME = "Alan"
             }
 
             steps {
                 echo GIT_BRANCH
-                echo "FOO = ${env.FOO}"
+                echo "FOO = ${env.branchName}"
                 echo "NAME = ${env.NAME}"
 
              
