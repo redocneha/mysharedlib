@@ -12,6 +12,8 @@ def call(Map params)
             when { 
                 anyOf {
                     expression { branchName ==~ 'main'}
+                    expression { branchName ==~ 'master'}
+                    
                 }
             }
             environment {
