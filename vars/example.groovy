@@ -1,3 +1,8 @@
+def getBranchName(){
+    checkout scm
+   return scm.branches[0].name
+}
+def branchName = getBranchName()
 
 def call(Map params){
     
@@ -18,6 +23,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
+                        echo branchName
                         echo scm.branches[0].name
                     }
                 }
