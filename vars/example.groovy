@@ -26,7 +26,7 @@ pipeline {
                 stage('Build'){
                     steps{
                        checkout scm
-                        echo "My branch is: ${branchName}"
+                        echo scm.branches[0].name
                     }
                 }
                  stage('Unit test') {
