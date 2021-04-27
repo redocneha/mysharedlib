@@ -1,6 +1,6 @@
 def call(Map params){
  environment{
-  branchName = GIT_BRANCH.replaceFirst(/^.*\//, '')
+  def branchName = GIT_BRANCH.replaceFirst(/^.*\//, '')
  }
 
 pipeline {
