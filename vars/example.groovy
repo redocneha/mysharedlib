@@ -1,3 +1,4 @@
+def b = "Neha"
 def call(Map params){
  environment{
   branchName = GIT_BRANCH.replaceFirst(/^.*\//, '')
@@ -15,7 +16,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                      echo branchName
+                     echo "${b}"
                         
                     }
                 }
