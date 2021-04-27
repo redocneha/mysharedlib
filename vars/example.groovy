@@ -1,5 +1,9 @@
 def call(Map params){
-
+ 
+    environment{
+        branchName = GIT_BRANCH.replaceFirst(/^.*\//, '')
+    }
+    
 pipeline {
     agent any
     options{
@@ -12,7 +16,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                        echo "${GIT_BRANCH.replaceFirst(/^.*\//, '')}"
+                        echo branchName
  
                         
                     }
