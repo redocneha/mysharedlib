@@ -6,28 +6,90 @@ def call(Map params)
     environment {
         branchName = GIT_BRANCH.replaceFirst(/^.*\//, '')
     }
-
-    stages {
-        stage("Env Variables") {
-            when { 
+     stages {
+        stage{
+	when { 
                 anyOf {
-                    expression { branchName ==~ 'main'}
+                    expression { branchName ==~ 'feature-/*'}
                     expression { branchName ==~ 'master'}
-                    
+                    expression { branchName ==~ 'release-/*'}       
                 }
             }
-            environment {
-                NAME = "Alan"
-            }
-
-            steps {
-                echo GIT_BRANCH
-                echo "FOO = ${branchName}"
-                echo "NAME = ${env.NAME}"
-
-             
-            }
+             parallel{
+                stage('Build'){
+                    steps{
+                        echo 'Build Stage done'
+                    }
+                }
+                 stage('Unit test') {
+                    steps {
+                        echo 'Unit test done'
+                    }
+                }
+              }
         }
+        stage('Sonar') {
+		when { 
+                anyOf {
+                    expression { branchName ==~ 'feature-/*'}
+                    expression { branchName ==~ 'master'}
+                    expression { branchName ==~ 'release-/*'}       
+                }
+            }
+                    steps {
+                        echo 'Sonar Stage done'
+                    }
+         }
+          stage('Docker build') {
+     		when { 
+                anyOf {
+                    expression { branchName ==~ 'feature-/*'}
+                    expression { branchName ==~ 'master'}
+                    expression { branchName ==~ 'release-/*'}       
+                }
+            }
+                    steps {
+                        echo 'Docker build stage done'
+                    }
+         }
+          stage('Deploy') {
+          
+            when { 
+                anyOf {
+                    expression { branchName ==~ 'feature-/*'}
+                    expression { branchName ==~ 'master'}
+                    expression { branchName ==~ 'release-/*'}       
+                }
+            }
+                    steps {
+                        echo 'Deploy stage done'
+                    }
+         }
+         stage('BDD') {
+             when { 
+                anyOf {                  
+                    expression { branchName ==~ 'master'}
+                    expression { branchName ==~ 'release-/*'}       
+                }
+            }
+                    steps {
+                        echo ' BDD stage done'
+                    }
+         }
+         stage('Nexus publish') {
+             when { 
+                anyOf {
+                    expression { branchName ==~ 'master'}
+                    expression { branchName ==~ 'release-/*'}       
+                }
+            }
+                    steps {
+                        echo 'Nexus publish Stage done'
+                    }
+         }
+        
     }
+   
+   
 }
 }
