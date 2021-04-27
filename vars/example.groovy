@@ -15,7 +15,7 @@ pipeline {
               parallel{
                 stage('Build'){
                     steps{
-                      `sh "echo ${branchName}" 
+                      sh "echo ${branchName}" 
                         
                     }
                 }
